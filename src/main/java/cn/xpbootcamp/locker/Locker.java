@@ -1,10 +1,10 @@
 package cn.xpbootcamp.locker;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Locker {
-    private List<Bag> locker = new ArrayList<>();
+    private Map<Receipt, Bag> locker = new HashMap<>();
     private int capacity;
 
     public Locker(int capacity) {
@@ -12,10 +12,15 @@ public class Locker {
     }
 
     public Receipt storageBag(Bag bag) {
-        if(locker.size() == capacity) {
+        if(locker.keySet().size() == capacity) {
             throw new LockerIsFullException();
         }
-        locker.add(bag);
-        return new Receipt();
+        Receipt receipt = new Receipt();
+        locker.put(receipt, bag);
+        return receipt;
+    }
+
+    public Bag takeBag(Receipt receipt) {
+        return locker.get(receipt);
     }
 }
