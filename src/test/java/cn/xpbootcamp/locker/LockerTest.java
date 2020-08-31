@@ -36,7 +36,7 @@ public class LockerTest {
 
         Bag retrieveBag = locker.takeBag(receipt);
 
-        Assert.assertEquals(bag,retrieveBag);
+        Assert.assertEquals(bag, retrieveBag);
     }
 
     @Test

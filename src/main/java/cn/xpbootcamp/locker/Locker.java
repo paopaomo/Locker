@@ -22,7 +22,6 @@ public class Locker {
 
     public Bag takeBag(Receipt receipt) {
         for (Receipt hasBeenTakenReceipt : hasBeenTakenReceipts) {
-            System.out.println(hasBeenTakenReceipt);
             if (hasBeenTakenReceipt == receipt) {
                 throw new BagHasBeenPickedUpException();
             }
