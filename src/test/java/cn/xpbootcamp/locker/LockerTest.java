@@ -50,4 +50,16 @@ public class LockerTest {
             locker.takeBag(invalidReceipt);
         });
     }
+
+    @Test
+    public void should_indicate_the_bag_has_been_picked_up_when_take_the_bag_given_a_duplicate_receipt() {
+        Locker locker = new Locker(10);
+        Bag bag = new Bag();
+        Receipt receipt = locker.storageBag(bag);
+        locker.takeBag(receipt);
+
+        assertThrows(BagHasBeenPickedUpException.class, () -> {
+            locker.takeBag(receipt);
+        });
+    }
 }

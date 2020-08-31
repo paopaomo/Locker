@@ -1,11 +1,11 @@
 package cn.xpbootcamp.locker;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Locker {
     private Map<Receipt, Bag> locker = new HashMap<>();
     private int capacity;
+    private List<Receipt>hasBeenTakenReceipts = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
@@ -21,9 +21,16 @@ public class Locker {
     }
 
     public Bag takeBag(Receipt receipt) {
+        for (Receipt hasBeenTakenReceipt : hasBeenTakenReceipts) {
+            System.out.println(hasBeenTakenReceipt);
+            if (hasBeenTakenReceipt == receipt) {
+                throw new BagHasBeenPickedUpException();
+            }
+        }
         if(locker.get(receipt) == null) {
             throw new ReceiptIsInvalidException();
         }
-        return locker.get(receipt);
+        hasBeenTakenReceipts.add(receipt);
+        return locker.remove(receipt);
     }
 }
