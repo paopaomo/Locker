@@ -12,6 +12,9 @@ public class Locker {
     }
 
     public Receipt storageBag(Bag bag) {
+        if(locker.size() == capacity) {
+            throw new LockerIsFullException();
+        }
         locker.add(bag);
         return new Receipt();
     }
