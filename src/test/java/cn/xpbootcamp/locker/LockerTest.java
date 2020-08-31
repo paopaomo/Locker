@@ -38,4 +38,16 @@ public class LockerTest {
 
         Assert.assertEquals(bag,retrieveBag);
     }
+
+    @Test
+    public void should_indicate_the_receipt_is_incorrect_when_take_the_bag_given_a_invalid_receipt() {
+        Locker locker = new Locker(10);
+        Bag bag = new Bag();
+        locker.storageBag(bag);
+
+        assertThrows(ReceiptIsInvalidException.class, () -> {
+            Receipt invalidReceipt = new Receipt();
+            locker.takeBag(invalidReceipt);
+        });
+    }
 }

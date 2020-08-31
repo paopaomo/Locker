@@ -21,6 +21,9 @@ public class Locker {
     }
 
     public Bag takeBag(Receipt receipt) {
+        if(locker.get(receipt) == null) {
+            throw new ReceiptIsInvalidException();
+        }
         return locker.get(receipt);
     }
 }
