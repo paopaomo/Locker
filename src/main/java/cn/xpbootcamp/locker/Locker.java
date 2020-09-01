@@ -11,7 +11,7 @@ public class Locker {
         this.capacity = capacity;
     }
 
-    public Receipt storageBag(Bag bag) {
+    public Receipt saveBag(Bag bag) {
         if(receiptBagRelation.keySet().size() == capacity) {
             throw new LockerIsFullException();
         }
