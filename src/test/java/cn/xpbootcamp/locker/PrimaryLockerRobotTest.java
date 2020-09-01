@@ -17,4 +17,18 @@ public class PrimaryLockerRobotTest {
         Assert.assertEquals(locker1.getCurrentStorage(), 1);
         Assert.assertEquals(RobotReceipt.class, robotReceipt.getClass());
     }
+
+    @Test
+    public void should_save_to_locker2_and_print_a_receipt_when_robot_save_bag_given_locker1_is_full_and_other_lockers_are_empty() {
+        Locker locker1 = new Locker(1);
+        Locker locker2 = new Locker(10);
+        Locker locker3 = new Locker(10);
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(locker1, locker2, locker3));
+        locker1.saveBag(new Bag());
+
+        RobotReceipt robotReceipt = robot.saveBag(new Bag());
+
+        Assert.assertEquals(locker2.getCurrentStorage(), 1);
+        Assert.assertEquals(RobotReceipt.class, robotReceipt.getClass());
+    }
 }
