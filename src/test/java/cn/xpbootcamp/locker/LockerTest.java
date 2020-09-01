@@ -9,22 +9,19 @@ public class LockerTest {
     @Test
     public void should_print_a_receipt_when_storage_bag_given_locker_with_an_opening() {
         Locker locker = new Locker(10);
-        Bag bag = new Bag();
 
-        Receipt receipt = locker.storageBag(bag);
+        Receipt receipt = locker.storageBag(new Bag());
 
         Assert.assertEquals(Receipt.class, receipt.getClass());
     }
 
     @Test
-    public void should_indicate_the_locker_is_full_when_storage_bag_given_locker_without_an_opening() {
+    public void should_throw_LockerIsFullException_when_storage_bag_given_locker_without_an_opening() {
         Locker locker = new Locker(1);
-        Bag bag1 = new Bag();
-        locker.storageBag(bag1);
+        locker.storageBag(new Bag());
 
         assertThrows(LockerIsFullException.class, () -> {
-            Bag bag2 = new Bag();
-            locker.storageBag(bag2);
+            locker.storageBag(new Bag());
         });
     }
 
@@ -40,22 +37,19 @@ public class LockerTest {
     }
 
     @Test
-    public void should_indicate_the_receipt_is_incorrect_when_take_the_bag_given_a_invalid_receipt() {
+    public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_a_invalid_receipt() {
         Locker locker = new Locker(10);
-        Bag bag = new Bag();
-        locker.storageBag(bag);
+        locker.storageBag(new Bag());
 
         assertThrows(ReceiptIsInvalidException.class, () -> {
-            Receipt invalidReceipt = new Receipt();
-            locker.takeBag(invalidReceipt);
+            locker.takeBag(new Receipt());
         });
     }
 
     @Test
-    public void should_indicate_the_bag_has_been_picked_up_when_take_the_bag_given_a_duplicate_receipt() {
+    public void should_throw_BagHasBeenPickedUpException_when_take_the_bag_given_a_duplicate_receipt() {
         Locker locker = new Locker(10);
-        Bag bag = new Bag();
-        Receipt receipt = locker.storageBag(bag);
+        Receipt receipt = locker.storageBag(new Bag());
         locker.takeBag(receipt);
 
         assertThrows(BagHasBeenPickedUpException.class, () -> {
