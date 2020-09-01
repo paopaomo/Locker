@@ -32,4 +32,8 @@ public class Locker {
         hasBeenTakenReceipts.add(receipt);
         return receiptBagRelation.remove(receipt);
     }
+
+    public Object getCurrentStorage() {
+        return 1;
+    }
 }

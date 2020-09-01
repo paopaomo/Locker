@@ -1,0 +1,20 @@
+package cn.xpbootcamp.locker;
+
+import com.sun.tools.javac.util.List;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class PrimaryLockerRobotTest {
+    @Test
+    public void should_save_to_locker1_and_print_a_receipt_when_robot_save_bag_given_many_lockers_are_empty() {
+        Locker locker1 = new Locker(10);
+        Locker locker2 = new Locker(10);
+        Locker locker3 = new Locker(10);
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(locker1, locker2, locker3));
+
+        RobotReceipt robotReceipt = robot.saveBag(new Bag());
+
+        Assert.assertEquals(locker1.getCurrentStorage(), 1);
+        Assert.assertEquals(RobotReceipt.class, robotReceipt.getClass());
+    }
+}
