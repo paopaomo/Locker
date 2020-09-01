@@ -42,7 +42,7 @@ public class LockerTest {
         locker.saveBag(new Bag());
 
         assertThrows(ReceiptIsInvalidException.class, () -> {
-            locker.takeBag(new Receipt());
+            locker.takeBag(null);
         });
     }
 
