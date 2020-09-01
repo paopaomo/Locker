@@ -3,10 +3,19 @@ package cn.xpbootcamp.locker;
 import com.sun.tools.javac.util.List;
 
 public class PrimaryLockerRobot {
-    public PrimaryLockerRobot(List<Locker> of) {
+    private List<Locker> lockers;
+
+    public PrimaryLockerRobot(List<Locker> lockers) {
+        this.lockers = lockers;
     }
 
     public RobotReceipt saveBag(Bag bag) {
-        return new RobotReceipt();
+        for(Locker locker: lockers) {
+            if(locker.getCurrentStorage() < locker.capacity) {
+                locker.saveBag(bag);
+                return new RobotReceipt();
+            }
+        }
+        throw new LockerIsFullException();
     }
 }

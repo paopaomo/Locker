@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Locker {
     private Map<Receipt, Bag> receiptBagRelation = new HashMap<>();
-    private int capacity;
+    public int capacity;
     private List<Receipt>hasBeenTakenReceipts = new ArrayList<>();
 
     public Locker(int capacity) {
@@ -33,7 +33,7 @@ public class Locker {
         return receiptBagRelation.remove(receipt);
     }
 
-    public Object getCurrentStorage() {
-        return 1;
+    public int getCurrentStorage() {
+        return receiptBagRelation.keySet().size();
     }
 }
