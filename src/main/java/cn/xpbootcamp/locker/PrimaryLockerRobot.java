@@ -21,6 +21,9 @@ public class PrimaryLockerRobot {
     }
 
     public Bag takeBag(RobotReceipt robotReceipt) {
+        if(robotReceipt == null) {
+            throw new RobotReceiptIsInvalidException();
+        }
         int lockerIndex = robotReceipt.getLockerIndex();
         Receipt receipt = robotReceipt.getReceipt();
         return lockers.get(lockerIndex).takeBag(receipt);
