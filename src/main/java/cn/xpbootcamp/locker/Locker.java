@@ -3,7 +3,7 @@ package cn.xpbootcamp.locker;
 import java.util.*;
 
 public class Locker {
-    private Map<Receipt, Bag> locker = new HashMap<>();
+    private Map<Receipt, Bag> receiptBagRelation = new HashMap<>();
     private int capacity;
     private List<Receipt>hasBeenTakenReceipts = new ArrayList<>();
 
@@ -12,11 +12,11 @@ public class Locker {
     }
 
     public Receipt storageBag(Bag bag) {
-        if(locker.keySet().size() == capacity) {
+        if(receiptBagRelation.keySet().size() == capacity) {
             throw new LockerIsFullException();
         }
         Receipt receipt = new Receipt();
-        locker.put(receipt, bag);
+        receiptBagRelation.put(receipt, bag);
         return receipt;
     }
 
@@ -26,10 +26,10 @@ public class Locker {
                 throw new BagHasBeenPickedUpException();
             }
         }
-        if(locker.get(receipt) == null) {
+        if(receiptBagRelation.get(receipt) == null) {
             throw new ReceiptIsInvalidException();
         }
         hasBeenTakenReceipts.add(receipt);
-        return locker.remove(receipt);
+        return receiptBagRelation.remove(receipt);
     }
 }
