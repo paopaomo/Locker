@@ -4,36 +4,38 @@ import java.util.*;
 
 public class Locker {
     private Map<Receipt, Bag> receiptBagRelation = new HashMap<>();
-    public int capacity;
-    private List<Receipt>hasBeenTakenReceipts = new ArrayList<>();
+    private int capacity;
+    private List<Receipt> hasBeenTakenReceipts = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
     }
 
     public Receipt saveBag(Bag bag) {
-        if(receiptBagRelation.keySet().size() == capacity) {
-            throw new LockerIsFullException();
+        if(hasAvailableCapacity()) {
+            Receipt receipt = new Receipt();
+            receiptBagRelation.put(receipt, bag);
+            return receipt;
         }
-        Receipt receipt = new Receipt();
-        receiptBagRelation.put(receipt, bag);
-        return receipt;
+        throw new LockerIsFullException();
     }
 
     public Bag takeBag(Receipt receipt) {
-        for (Receipt hasBeenTakenReceipt : hasBeenTakenReceipts) {
-            if (hasBeenTakenReceipt == receipt) {
-                throw new BagHasBeenPickedUpException();
-            }
+        if(hasBeenTakenReceipts.contains(receipt)) {
+            throw new BagHasBeenPickedUpException();
         }
-        if(receiptBagRelation.get(receipt) == null) {
-            throw new ReceiptIsInvalidException();
+        if(receiptBagRelation.containsKey(receipt)) {
+            hasBeenTakenReceipts.add(receipt);
+            return receiptBagRelation.remove(receipt);
         }
-        hasBeenTakenReceipts.add(receipt);
-        return receiptBagRelation.remove(receipt);
+        throw new ReceiptIsInvalidException();
     }
 
-    public int getCurrentStorage() {
-        return receiptBagRelation.keySet().size();
+    public boolean hasAvailableCapacity() {
+        return receiptBagRelation.size() < capacity;
+    }
+
+    public boolean existedReceipt(Receipt receipt) {
+        return receiptBagRelation.containsKey(receipt);
     }
 }
