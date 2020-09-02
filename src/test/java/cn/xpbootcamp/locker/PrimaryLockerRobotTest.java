@@ -17,7 +17,7 @@ public class PrimaryLockerRobotTest {
         RobotReceipt robotReceipt = robot.saveBag(new Bag());
 
         Assert.assertEquals(locker1.getCurrentStorage(), 1);
-        Assert.assertEquals(RobotReceipt.class, robotReceipt.getClass());
+        Assert.assertNotNull(robotReceipt);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PrimaryLockerRobotTest {
         RobotReceipt robotReceipt = robot.saveBag(new Bag());
 
         Assert.assertEquals(locker2.getCurrentStorage(), 1);
-        Assert.assertEquals(RobotReceipt.class, robotReceipt.getClass());
+        Assert.assertNotNull(robotReceipt);
     }
 
     @Test

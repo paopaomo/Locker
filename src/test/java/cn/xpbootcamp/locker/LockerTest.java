@@ -12,7 +12,7 @@ public class LockerTest {
 
         Receipt receipt = locker.saveBag(new Bag());
 
-        Assert.assertEquals(Receipt.class, receipt.getClass());
+        Assert.assertNotNull(receipt);
     }
 
     @Test
