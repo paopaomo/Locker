@@ -38,4 +38,8 @@ public class Locker {
     public boolean existedReceipt(Receipt receipt) {
         return receiptBagRelation.containsKey(receipt);
     }
+
+    public int getAvailableCapacity() {
+        return capacity - receiptBagRelation.size();
+    }
 }
