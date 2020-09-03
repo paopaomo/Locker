@@ -3,6 +3,7 @@ package cn.xpbootcamp.locker;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class SmartLockerRobotTest {
     @Test
@@ -42,5 +43,18 @@ public class SmartLockerRobotTest {
 
         Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, locker1.takeBag(receipt));
+    }
+
+    @Test
+    public void should_throw_LockerIsFullException_when_save_bag_given_locker1_and_locker2_are_both_full() {
+        Locker locker1 = new Locker(1);
+        Locker locker2 = new Locker(1);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker1, locker2));
+        locker1.saveBag(new Bag());
+        locker2.saveBag(new Bag());
+
+        Assertions.assertThrows(LockerIsFullException.class, () -> {
+            smartLockerRobot.saveBag(new Bag());
+        });
     }
 }
