@@ -30,4 +30,17 @@ public class SmartLockerRobotTest {
         Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, locker2.takeBag(receipt));
     }
+
+    @Test
+    public void should_save_to_locker1_and_print_a_receipt_when_save_bag_given_locker1_and_locker2_both_have_3_capacity() {
+        Locker locker1 = new Locker(3);
+        Locker locker2 = new Locker(3);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker1, locker2));
+
+        Bag bag = new Bag();
+        Receipt receipt = smartLockerRobot.saveBag(bag);
+
+        Assert.assertNotNull(receipt);
+        Assert.assertEquals(bag, locker1.takeBag(receipt));
+    }
 }
