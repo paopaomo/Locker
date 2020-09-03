@@ -57,4 +57,16 @@ public class SmartLockerRobotTest {
             smartLockerRobot.saveBag(new Bag());
         });
     }
+
+    @Test
+    public void should_take_the_right_bag_when_take_the_bag_given_a_valid_receipt() {
+        Locker locker1 = new Locker(10);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker1));
+        Bag bag = new Bag();
+        Receipt receipt = smartLockerRobot.saveBag(bag);
+
+        Bag retrieveBag = smartLockerRobot.takeBag(receipt);
+
+        Assert.assertEquals(bag, retrieveBag);
+    }
 }

@@ -32,4 +32,13 @@ public class SmartLockerRobot {
         }
         return locker1;
     }
+
+    public Bag takeBag(Receipt receipt) {
+        for(Locker locker: lockers) {
+            if(locker.existedReceipt(receipt)) {
+                return locker.takeBag(receipt);
+            }
+        }
+        return null;
+    }
 }
