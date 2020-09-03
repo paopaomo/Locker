@@ -69,4 +69,14 @@ public class SmartLockerRobotTest {
 
         Assert.assertEquals(bag, retrieveBag);
     }
+
+    @Test
+    public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_a_invalid_receipt() {
+        Locker locker1 = new Locker(1);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(locker1));
+
+        Assertions.assertThrows(ReceiptIsInvalidException.class, () -> {
+            smartLockerRobot.takeBag(new Receipt());
+        });
+    }
 }

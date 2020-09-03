@@ -39,6 +39,6 @@ public class SmartLockerRobot {
                 return locker.takeBag(receipt);
             }
         }
-        return null;
+        throw new ReceiptIsInvalidException();
     }
 }
