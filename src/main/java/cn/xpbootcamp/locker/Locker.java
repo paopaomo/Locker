@@ -5,7 +5,6 @@ import java.util.*;
 public class Locker {
     private Map<Receipt, Bag> receiptBagRelation = new HashMap<>();
     private int capacity;
-    private List<Receipt> hasBeenTakenReceipts = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
@@ -21,11 +20,7 @@ public class Locker {
     }
 
     public Bag takeBag(Receipt receipt) {
-        if(hasBeenTakenReceipts.contains(receipt)) {
-            throw new BagHasBeenPickedUpException();
-        }
         if(receiptBagRelation.containsKey(receipt)) {
-            hasBeenTakenReceipts.add(receipt);
             return receiptBagRelation.remove(receipt);
         }
         throw new ReceiptIsInvalidException();

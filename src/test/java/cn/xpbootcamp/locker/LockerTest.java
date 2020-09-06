@@ -46,12 +46,12 @@ public class LockerTest {
     }
 
     @Test
-    public void should_throw_BagHasBeenPickedUpException_when_take_the_bag_given_a_duplicate_receipt() {
+    public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_a_reused_receipt() {
         Locker locker = new Locker(10);
         Receipt receipt = locker.saveBag(new Bag());
         locker.takeBag(receipt);
 
-        assertThrows(BagHasBeenPickedUpException.class, () -> {
+        assertThrows(ReceiptIsInvalidException.class, () -> {
             locker.takeBag(receipt);
         });
     }
