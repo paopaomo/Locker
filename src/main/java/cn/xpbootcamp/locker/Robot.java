@@ -20,4 +20,13 @@ public abstract class Robot {
         }
         throw new ReceiptIsInvalidException();
     }
+
+    public Boolean isAllLockerFull() {
+        for(Locker locker: lockers) {
+            if(locker.hasAvailableCapacity()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

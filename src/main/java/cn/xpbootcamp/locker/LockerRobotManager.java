@@ -10,6 +10,11 @@ public class LockerRobotManager {
     }
 
     public Receipt saveBag(Bag bag) {
-        return this.managedList.get(0).saveBag(bag);
+        for(Robot robot: managedList) {
+            if(!robot.isAllLockerFull()) {
+                return robot.saveBag(bag);
+            }
+        }
+        return null;
     }
 }
