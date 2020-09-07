@@ -4,6 +4,8 @@ import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class LockerRobotManagerTest {
     @Test
     public void should_save_by_robot1_and_print_a_receipt_when_save_bag_given_manage_2_robots_with_available_capacity_and_not_manage_locker() {
@@ -28,5 +30,18 @@ public class LockerRobotManagerTest {
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
         Assert.assertEquals(bag, smartLockerRobot.takeBag(receipt));
+    }
+
+    @Test
+    public void should_throw_LockerIsFullException_when_save_bag_given_2_robots_are_both_full_and_not_manage_locker() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(1)));
+        primaryLockerRobot.saveBag(new Bag());
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(new Locker(1)));
+        smartLockerRobot.saveBag(new Bag());
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
+
+        assertThrows(LockerIsFullException.class, () -> {
+            lockerRobotManager.saveBag(new Bag());
+        });
     }
 }
