@@ -12,10 +12,7 @@ public class SmartLockerRobot {
 
     public Receipt saveBag(Bag bag) {
         Locker locker = getMaxAvailableLocker();
-        if(locker.hasAvailableCapacity()) {
-            return locker.saveBag(bag);
-        }
-        throw new LockerIsFullException();
+        return locker.saveBag(bag);
     }
 
     private Locker getMaxAvailableLocker() {
