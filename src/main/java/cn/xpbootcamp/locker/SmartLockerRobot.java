@@ -1,13 +1,10 @@
 package cn.xpbootcamp.locker;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class SmartLockerRobot {
-    private List<Locker> lockers;
-
+public class SmartLockerRobot extends Robot {
     public SmartLockerRobot(ArrayList<Locker> lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
     public Receipt saveBag(Bag bag) {
@@ -28,14 +25,5 @@ public class SmartLockerRobot {
             return locker2;
         }
         return locker1;
-    }
-
-    public Bag takeBag(Receipt receipt) {
-        for(Locker locker: lockers) {
-            if(locker.existedReceipt(receipt)) {
-                return locker.takeBag(receipt);
-            }
-        }
-        throw new ReceiptIsInvalidException();
     }
 }

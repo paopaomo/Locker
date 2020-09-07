@@ -1,12 +1,10 @@
 package cn.xpbootcamp.locker;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class PrimaryLockerRobot {
-    private List<Locker> lockers;
-
-    public PrimaryLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
+public class PrimaryLockerRobot extends Robot {
+    public PrimaryLockerRobot(ArrayList<Locker> lockers) {
+        super(lockers);
     }
 
     public Receipt saveBag(Bag bag) {
@@ -16,14 +14,5 @@ public class PrimaryLockerRobot {
             }
         }
         throw new LockerIsFullException();
-    }
-
-    public Bag takeBag(Receipt receipt) {
-        for(Locker locker: lockers) {
-            if(locker.existedReceipt(receipt)) {
-                return locker.takeBag(receipt);
-            }
-        }
-        throw new ReceiptIsInvalidException();
     }
 }
