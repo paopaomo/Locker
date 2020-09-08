@@ -164,4 +164,18 @@ public class LockerRobotManagerTest {
             lockerRobotManager.takeBag(new Receipt());
         });
     }
+
+    @Test
+    public void should_get_the_right_bag_when_take_the_bag_given_manage_2_lockers_not_manage_robot_and_a_valid_receipt() {
+        Locker locker1 = new Locker(10);
+        Locker locker2 = new Locker(10);
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageLocker(Lists.newArrayList(locker1, locker2));
+        Bag bag = new Bag();
+        Receipt receipt = lockerRobotManager.saveBag(bag);
+
+        Bag retrieveBag = lockerRobotManager.takeBag(receipt);
+
+        Assert.assertEquals(bag, retrieveBag);
+    }
 }

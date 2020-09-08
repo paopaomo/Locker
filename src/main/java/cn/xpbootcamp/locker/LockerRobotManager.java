@@ -36,6 +36,11 @@ public class LockerRobotManager {
                 return robot.takeBag(receipt);
             }
         }
+        for(Locker locker: lockers) {
+            if(locker.existedReceipt(receipt)) {
+                return locker.takeBag(receipt);
+            }
+        }
         throw new ReceiptIsInvalidException();
     }
 }
