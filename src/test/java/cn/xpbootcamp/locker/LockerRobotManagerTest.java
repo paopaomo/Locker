@@ -205,4 +205,17 @@ public class LockerRobotManagerTest {
 
         Assert.assertEquals(bag, retrieveBag);
     }
+
+    @Test
+    public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_manage_1_robot_1_locker_and_an_invalid_receipt() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(1)));
+        Locker locker = new Locker(10);
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot));
+        lockerRobotManager.manageLocker(Lists.newArrayList(locker));
+
+        assertThrows(ReceiptIsInvalidException.class, () -> {
+            lockerRobotManager.takeBag(new Receipt());
+        });
+    }
 }
