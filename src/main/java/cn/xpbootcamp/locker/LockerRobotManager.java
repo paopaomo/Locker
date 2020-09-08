@@ -29,4 +29,13 @@ public class LockerRobotManager {
         }
         throw  new LockerIsFullException();
     }
+
+    public Bag takeBag(Receipt receipt) {
+        for(Robot robot: robots) {
+            if(robot.existReceipt(receipt)) {
+                return robot.takeBag(receipt);
+            }
+        }
+        return null;
+    }
 }

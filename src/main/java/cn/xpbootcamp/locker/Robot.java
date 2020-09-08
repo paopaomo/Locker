@@ -29,4 +29,13 @@ public abstract class Robot {
         }
         return true;
     }
+
+    public Boolean existReceipt(Receipt receipt) {
+        for(Locker locker: lockers) {
+            if(locker.existedReceipt(receipt)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
