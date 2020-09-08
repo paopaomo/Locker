@@ -11,7 +11,8 @@ public class LockerRobotManagerTest {
     public void should_save_by_robot1_and_print_a_receipt_when_save_bag_given_manage_2_robots_with_available_capacity_and_not_manage_locker() {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(10)));
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -24,7 +25,8 @@ public class LockerRobotManagerTest {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(1)));
         primaryLockerRobot.saveBag(new Bag());
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -38,7 +40,8 @@ public class LockerRobotManagerTest {
         primaryLockerRobot.saveBag(new Bag());
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Lists.newArrayList(new Locker(1)));
         smartLockerRobot.saveBag(new Bag());
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot, smartLockerRobot));
 
         assertThrows(LockerIsFullException.class, () -> {
             lockerRobotManager.saveBag(new Bag());
