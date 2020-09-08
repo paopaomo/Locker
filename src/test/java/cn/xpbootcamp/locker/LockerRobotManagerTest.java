@@ -47,4 +47,17 @@ public class LockerRobotManagerTest {
             lockerRobotManager.saveBag(new Bag());
         });
     }
+
+    @Test
+    public void should_save_to_locker1_and_print_a_receipt_when_save_bag_given_manage_2_lockers_with_available_capacity_and_not_manage_robot() {
+        Locker locker1 = new Locker(10);
+        Locker locker2 = new Locker(10);
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageLocker(Lists.newArrayList(locker1, locker2));
+
+        Bag bag = new Bag();
+        Receipt receipt = lockerRobotManager.saveBag(bag);
+
+        Assert.assertEquals(bag, locker1.takeBag(receipt));
+    }
 }
