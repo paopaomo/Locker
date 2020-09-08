@@ -107,4 +107,20 @@ public class LockerRobotManagerTest {
         Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, primaryLockerRobot.takeBag(receipt));
     }
+
+    @Test
+    public void should_save_to_locker_and_print_a_receipt_when_save_bag_given_manage_1_robot_has_no_available_capacity_and_1_locker_has_available_capacity() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(1)));
+        primaryLockerRobot.saveBag(new Bag());
+        Locker locker = new Locker(10);
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot));
+        lockerRobotManager.manageLocker(Lists.newArrayList(locker));
+
+        Bag bag = new Bag();
+        Receipt receipt = lockerRobotManager.saveBag(bag);
+
+        Assert.assertNotNull(receipt);
+        Assert.assertEquals(bag, locker.takeBag(receipt));
+    }
 }
