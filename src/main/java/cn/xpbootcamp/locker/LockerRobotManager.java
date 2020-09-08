@@ -36,6 +36,6 @@ public class LockerRobotManager {
                 return robot.takeBag(receipt);
             }
         }
-        return null;
+        throw new ReceiptIsInvalidException();
     }
 }
