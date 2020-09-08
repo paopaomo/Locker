@@ -17,6 +17,7 @@ public class LockerRobotManagerTest {
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
+        Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, primaryLockerRobot.takeBag(receipt));
     }
 
@@ -31,6 +32,7 @@ public class LockerRobotManagerTest {
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
+        Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, smartLockerRobot.takeBag(receipt));
     }
 
@@ -58,6 +60,7 @@ public class LockerRobotManagerTest {
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
+        Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, locker1.takeBag(receipt));
     }
 }
