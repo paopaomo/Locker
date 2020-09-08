@@ -123,4 +123,19 @@ public class LockerRobotManagerTest {
         Assert.assertNotNull(receipt);
         Assert.assertEquals(bag, locker.takeBag(receipt));
     }
+
+    @Test
+    public void should_throw_LockerIsFullException_when_save_bag_given_1_locker_and_1_robot_are_both_full() {
+        Locker locker = new Locker(1);
+        locker.saveBag(new Bag());
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Lists.newArrayList(new Locker(1)));
+        primaryLockerRobot.saveBag(new Bag());
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manageLocker(Lists.newArrayList(locker));
+        lockerRobotManager.manageRobot(Lists.newArrayList(primaryLockerRobot));
+
+        assertThrows(LockerIsFullException.class, () -> {
+            lockerRobotManager.saveBag(new Bag());
+        });
+    }
 }
