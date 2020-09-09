@@ -7,6 +7,7 @@ public class PrimaryLockerRobot extends Robot {
         super(lockers);
     }
 
+    @Override
     public Receipt saveBag(Bag bag) {
         for (Locker locker : lockers) {
             if (locker.hasAvailableCapacity()) {

@@ -7,6 +7,7 @@ public class SmartLockerRobot extends Robot {
         super(lockers);
     }
 
+    @Override
     public Receipt saveBag(Bag bag) {
         Locker locker = getMaxAvailableLocker();
         return locker.saveBag(bag);
