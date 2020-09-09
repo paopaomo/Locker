@@ -18,7 +18,7 @@ public class LockerRobotManager {
 
     public Receipt saveBag(Bag bag) {
         for(Robot robot: robots) {
-            if(!robot.isAllLockerFull()) {
+            if(robot.hasAvailableCapacity()) {
                 return robot.saveBag(bag);
             }
         }
