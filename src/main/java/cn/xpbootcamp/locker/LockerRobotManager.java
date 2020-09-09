@@ -1,18 +1,17 @@
 package cn.xpbootcamp.locker;
 
-import org.assertj.core.util.Lists;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class LockerRobotManager {
-    final private ArrayList<Robot> robots = Lists.newArrayList();
-    final private ArrayList<Locker> lockers = Lists.newArrayList();
+    final private List<Robot> robots = new ArrayList<>();
+    final private List<Locker> lockers = new ArrayList<>();
 
-    public void manageRobot(ArrayList<Robot> robots) {
+    public void manageRobot(List<Robot> robots) {
         this.robots.addAll(robots);
     }
 
-    public void manageLocker(ArrayList<Locker> lockers) {
+    public void manageLocker(List<Locker> lockers) {
         this.lockers.addAll(lockers);
     }
 

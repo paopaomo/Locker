@@ -1,9 +1,9 @@
 package cn.xpbootcamp.locker;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SmartLockerRobot extends Robot {
-    public SmartLockerRobot(ArrayList<Locker> lockers) {
+    public SmartLockerRobot(List<Locker> lockers) {
         super(lockers);
     }
 
