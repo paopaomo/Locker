@@ -125,4 +125,19 @@ public class LockerRobotDirectorTest {
                 "\n\tL 3 4";
         Assert.assertEquals(expectReport, report.toString());
     }
+
+    @Test
+    public void should_return_the_report_of_locker_use_when_query_given_1_manager_is_managed_and_1_manager_is_not_managed() {
+        LockerRobotManager manager1 = new LockerRobotManager(List.of(new Locker(3)));
+        manager1.saveBag(new Bag());
+        LockerRobotManager manager2 = new LockerRobotManager(List.of(new Locker(4)));
+        manager2.saveBag(new Bag());
+        LockerRobotDirector director = new LockerRobotDirector(List.of(manager1));
+
+        StringBuilder report = director.getReport();
+
+        String expectReport = "M 2 3" +
+                "\n\tL 2 3";
+        Assert.assertEquals(expectReport, report.toString());
+    }
 }
