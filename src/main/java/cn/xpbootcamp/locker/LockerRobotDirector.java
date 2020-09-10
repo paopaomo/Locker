@@ -10,7 +10,10 @@ public class LockerRobotDirector {
     }
 
     public StringBuilder getReport() {
-        LockerRobotManager manager = this.managers.get(0);
-        return manager.getReport();
+        StringBuilder info = new StringBuilder(managers.get(0).getReport());
+        for(int i = 1; i < managers.size(); i++) {
+            info.append("\n").append(managers.get(i).getReport());
+        }
+        return info;
     }
 }

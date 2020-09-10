@@ -108,4 +108,21 @@ public class LockerRobotDirectorTest {
                 "\n\t\tL 2 3";
         Assert.assertEquals(expectReport, report.toString());
     }
+
+    @Test
+    public void should_return_the_report_of_locker_use_when_query_given_2_manager_both_manage_1_locker() {
+        LockerRobotManager manager1 = new LockerRobotManager(List.of(new Locker(3)));
+        manager1.saveBag(new Bag());
+        LockerRobotManager manager2 = new LockerRobotManager(List.of(new Locker(4)));
+        manager2.saveBag(new Bag());
+        LockerRobotDirector director = new LockerRobotDirector(List.of(manager1, manager2));
+
+        StringBuilder report = director.getReport();
+
+        String expectReport = "M 2 3" +
+                "\n\tL 2 3" +
+                "\nM 3 4" +
+                "\n\tL 3 4";
+        Assert.assertEquals(expectReport, report.toString());
+    }
 }
