@@ -41,4 +41,10 @@ public class Locker implements Storable {
     public int getAvailableCapacity() {
         return capacity - receiptBagRelation.size();
     }
+
+    public int getCapacity() { return capacity; }
+
+    public StringBuilder getReport() {
+        return new StringBuilder("L " + getAvailableCapacity() + " " + getCapacity());
+    }
 }

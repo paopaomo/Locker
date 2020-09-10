@@ -26,4 +26,28 @@ public class LockerRobotManager {
         }
         throw new ReceiptIsInvalidException();
     }
+
+    public int getAvailableCapacity() {
+        int availableCapacity = 0;
+        for(Storable storable: storables) {
+            availableCapacity += storable.getAvailableCapacity();
+        }
+        return availableCapacity;
+    }
+
+    public int getCapacity() {
+        int capacity = 0;
+        for(Storable storable: storables) {
+            capacity += storable.getCapacity();
+        }
+        return capacity;
+    }
+
+    public StringBuilder getReport() {
+        StringBuilder info = new StringBuilder("M " + getAvailableCapacity() + " " + getCapacity());
+        for(Storable storable: storables) {
+            info.append("\n").append("\t").append(storable.getReport());
+        }
+        return info;
+    }
 }

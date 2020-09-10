@@ -8,4 +8,10 @@ public interface Storable {
     boolean hasAvailableCapacity();
 
     boolean existedReceipt(Receipt receipt);
+
+    int getAvailableCapacity();
+
+    int getCapacity();
+
+    StringBuilder getReport();
 }

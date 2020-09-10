@@ -41,4 +41,28 @@ public abstract class Robot implements Storable {
         }
         return false;
     }
+
+    public int getAvailableCapacity() {
+        int availableCapacity = 0;
+        for(Locker locker: lockers) {
+            availableCapacity += locker.getAvailableCapacity();
+        }
+        return availableCapacity;
+    }
+
+    public int getCapacity() {
+        int capacity = 0;
+        for(Locker locker: lockers) {
+            capacity += locker.getCapacity();
+        }
+        return capacity;
+    }
+
+    public StringBuilder getReport() {
+        StringBuilder info = new StringBuilder("R " + getAvailableCapacity() + " " + getCapacity());
+        for(Locker locker: lockers) {
+            info.append("\n").append("\t\t").append(locker.getReport());
+        }
+        return info;
+    }
 }
