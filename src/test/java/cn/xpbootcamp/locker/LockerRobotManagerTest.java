@@ -12,8 +12,7 @@ public class LockerRobotManagerTest {
     public void should_save_by_robot1_and_print_a_receipt_when_save_bag_given_manage_2_robots_with_available_capacity_and_not_manage_locker() {
         PrimaryLockerRobot robot1 = new PrimaryLockerRobot(List.of(new Locker(10)));
         SmartLockerRobot robot2 = new SmartLockerRobot(List.of(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot1, robot2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot1, robot2));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -28,8 +27,7 @@ public class LockerRobotManagerTest {
                 new PrimaryLockerRobot(List.of(new Locker(1)));
         robot1.saveBag(new Bag());
         SmartLockerRobot robot2 = new SmartLockerRobot(List.of(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot1, robot2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot1, robot2));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -44,8 +42,7 @@ public class LockerRobotManagerTest {
         robot1.saveBag(new Bag());
         SmartLockerRobot robot2 = new SmartLockerRobot(List.of(new Locker(1)));
         robot2.saveBag(new Bag());
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot1, robot2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot1, robot2));
 
         assertThrows(LockerIsFullException.class, () -> {
             lockerRobotManager.saveBag(new Bag());
@@ -56,8 +53,7 @@ public class LockerRobotManagerTest {
     public void should_save_to_locker1_and_print_a_receipt_when_save_bag_given_manage_2_lockers_with_available_capacity_and_not_manage_robot() {
         Locker locker1 = new Locker(10);
         Locker locker2 = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker1, locker2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(locker1, locker2));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -71,8 +67,7 @@ public class LockerRobotManagerTest {
         Locker locker1 = new Locker(1);
         locker1.saveBag(new Bag());
         Locker locker2 = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker1, locker2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(locker1, locker2));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -87,8 +82,7 @@ public class LockerRobotManagerTest {
         locker1.saveBag(new Bag());
         Locker locker2 = new Locker(1);
         locker2.saveBag(new Bag());
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker1, locker2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(locker1, locker2));
 
         assertThrows(LockerIsFullException.class, () -> {
             lockerRobotManager.saveBag(new Bag());
@@ -99,9 +93,7 @@ public class LockerRobotManagerTest {
     public void should_save_by_robot_and_print_a_receipt_when_save_bag_given_manage_1_robot_and_1_locker_both_have_available_capacity() {
         PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(new Locker(10)));
         Locker locker = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot));
-        lockerRobotManager.manageLocker(List.of(locker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot, locker));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -115,9 +107,7 @@ public class LockerRobotManagerTest {
         PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(new Locker(1)));
         robot.saveBag(new Bag());
         Locker locker = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot));
-        lockerRobotManager.manageLocker(List.of(locker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot, locker));
 
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
@@ -132,9 +122,7 @@ public class LockerRobotManagerTest {
         locker.saveBag(new Bag());
         PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(new Locker(1)));
         robot.saveBag(new Bag());
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker));
-        lockerRobotManager.manageRobot(List.of(robot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot, locker));
 
         assertThrows(LockerIsFullException.class, () -> {
             lockerRobotManager.saveBag(new Bag());
@@ -145,8 +133,7 @@ public class LockerRobotManagerTest {
     public void should_get_the_right_bag_when_take_the_bag_given_manage_2_robots_not_manage_locker_and_a_valid_receipt() {
         PrimaryLockerRobot robot1 = new PrimaryLockerRobot(List.of(new Locker(10)));
         SmartLockerRobot robot2 = new SmartLockerRobot(List.of(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot1, robot2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot1, robot2));
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
@@ -159,8 +146,7 @@ public class LockerRobotManagerTest {
     public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_manage_2_robots_not_manage_locker_and_an_invalid_receipt() {
         PrimaryLockerRobot robot1 = new PrimaryLockerRobot(List.of(new Locker(10)));
         SmartLockerRobot robot2 = new SmartLockerRobot(List.of(new Locker(10)));
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot1, robot2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot1, robot2));
 
         assertThrows(ReceiptIsInvalidException.class, () -> {
             lockerRobotManager.takeBag(new Receipt());
@@ -171,8 +157,7 @@ public class LockerRobotManagerTest {
     public void should_get_the_right_bag_when_take_the_bag_given_manage_2_lockers_not_manage_robot_and_a_valid_receipt() {
         Locker locker1 = new Locker(10);
         Locker locker2 = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker1, locker2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(locker1, locker2));
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
@@ -185,8 +170,7 @@ public class LockerRobotManagerTest {
     public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_manage_2_lockers_not_manage_robot_and_an_invalid_receipt() {
         Locker locker1 = new Locker(10);
         Locker locker2 = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageLocker(List.of(locker1, locker2));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(locker1, locker2));
 
         assertThrows(ReceiptIsInvalidException.class, () -> {
             lockerRobotManager.takeBag(new Receipt());
@@ -197,9 +181,7 @@ public class LockerRobotManagerTest {
     public void should_get_the_right_bag_when_take_the_bag_given_manage_1_robot_1_locker_and_a_valid_receipt() {
         PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(new Locker(1)));
         Locker locker = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot));
-        lockerRobotManager.manageLocker(List.of(locker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot, locker));
         Bag bag = new Bag();
         Receipt receipt = lockerRobotManager.saveBag(bag);
 
@@ -212,9 +194,7 @@ public class LockerRobotManagerTest {
     public void should_throw_ReceiptIsInvalidException_when_take_the_bag_given_manage_1_robot_1_locker_and_an_invalid_receipt() {
         PrimaryLockerRobot robot = new PrimaryLockerRobot(List.of(new Locker(1)));
         Locker locker = new Locker(10);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager();
-        lockerRobotManager.manageRobot(List.of(robot));
-        lockerRobotManager.manageLocker(List.of(locker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(List.of(robot, locker));
 
         assertThrows(ReceiptIsInvalidException.class, () -> {
             lockerRobotManager.takeBag(new Receipt());

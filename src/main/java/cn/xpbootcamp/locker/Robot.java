@@ -2,15 +2,17 @@ package cn.xpbootcamp.locker;
 
 import java.util.List;
 
-public abstract class Robot {
+public abstract class Robot implements Storable {
     protected final List<Locker> lockers;
 
     public Robot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 
+    @Override
     public abstract Receipt saveBag(Bag bag);
 
+    @Override
     public Bag takeBag(Receipt receipt) {
         for(Locker locker: lockers) {
             if(locker.existedReceipt(receipt)) {
@@ -20,7 +22,8 @@ public abstract class Robot {
         throw new ReceiptIsInvalidException();
     }
 
-    public Boolean hasAvailableCapacity() {
+    @Override
+    public boolean hasAvailableCapacity() {
         for(Locker locker: lockers) {
             if(locker.hasAvailableCapacity()) {
                 return true;
@@ -29,7 +32,8 @@ public abstract class Robot {
         return false;
     }
 
-    public Boolean existReceipt(Receipt receipt) {
+    @Override
+    public boolean existedReceipt(Receipt receipt) {
         for(Locker locker: lockers) {
             if(locker.existedReceipt(receipt)) {
                 return true;
